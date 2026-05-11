@@ -1,51 +1,17 @@
-# Simple Customer Support Chatbot
+import nltk
+from nltk.chat.util import Chat, reflections
 
-print("===== Welcome to Customer Support Chatbot =====")
+pairs = [
+    [r"hi|hello|hey", ["Hello! Welcome!", "Hi there!"]],
+    [r"my name is (.*)", ["Hello %1!"]],
+    [r"(.*)courses(.*)", ["We offer B.Tech, M.Tech, MBA"]],
+    [r"(.*)admission(.*)", ["Admissions are open!"]],
+    [r"(.*)fees(.*)", ["Fees approx ₹1,00,000"]],
+    [r"(.*)placement(.*)", ["Top companies visit"]],
+    [r"bye|exit", ["Goodbye!"]],
+    [r"(.*)", ["Sorry, I didn't understand"]]
+]
 
-print("Type 'bye' to exit\n")
-
-while True:
-
-    # Take user input
-    user = input("You: ").lower()
-
-    # Greeting
-    if user in ["hello", "hi", "hey"]:
-
-        print("Bot: Hello! How can I help you?")
-
-    # Product inquiry
-    elif "product" in user:
-
-        print("Bot: We provide laptops, mobiles, and accessories.")
-
-    # Price inquiry
-    elif "price" in user:
-
-        print("Bot: Prices depend on the product model.")
-
-    # Working hours
-    elif "hours" in user or "time" in user:
-
-        print("Bot: Our shop is open from 9 AM to 9 PM.")
-
-    # Contact information
-    elif "contact" in user:
-
-        print("Bot: You can contact us at support@gmail.com")
-
-    # Thank you message
-    elif "thank" in user:
-
-        print("Bot: You're welcome!")
-
-    # Exit condition
-    elif user == "bye":
-
-        print("Bot: Thank you for visiting!")
-        break
-
-    # Unknown query
-    else:
-
-        print("Bot: Sorry, I didn't understand that.")
+chatbot = Chat(pairs, reflections)
+print("Chatbot started...")
+chatbot.converse()
